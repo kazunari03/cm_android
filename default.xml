@@ -13,17 +13,35 @@
   <remote  name="private"
            fetch="ssh://git@github.com" />
 
+  <remote  name="jcrom"
+           fetch="https://github.com/JCROM-Android/" />
+
   <default revision="refs/heads/cm-12.0"
            remote="github"
            sync-c="true"
            sync-j="4" />
 
-  <project path="build" name="CyanogenMod/android_build" groups="pdk,tradefed" >
+
+<!-- JCROM -->
+  <project path="packages/apps/JCWallpaper" name="jcrom_packages_apps_JCWallpaper" remote="jcrom" revision="lolli" />
+  <project path="packages/apps/JCLauncher" name="jcrom_packages_apps_JCLauncher" remote="jcrom" revision="lolli" />
+  <project path="packages/apps/VisualThemeSelector" name="jcrom_packages_apps_VisualThemeSelector" remote="jcrom" revision="lolli" />
+  <project path="jcrom/common" name="jcrom_common" remote="jcrom" revision="lolli" />
+
+<!-- JCROM + CyanogenMod -->
+  <project path="build" name="cm_android_build" remote="jcrom" revision="cm-12.0-jcrom">
     <copyfile src="core/root.mk" dest="Makefile" />
   </project>
+  <project path="android" name="cm_android" remote="jcrom" revision="cm-12.0-jcrom" />
+  <project path="frameworks/av" name="cm_android_frameworks_av" remote="jcrom" revision="cm-12.0-jcrom" />
+  <project path="frameworks/base" name="cm_android_frameworks_base" remote="jcrom" revision="cm-12.0-jcrom" />
+  <project path="packages/apps/CMUpdater" name="cm_android_packages_apps_CMUpdater" remote="jcrom" revision="cm-12.0-jcrom" />
+  <project path="packages/apps/Settings" name="cm_android_packages_apps_Settings" remote="jcrom" revision="cm-12.0-jcrom" />
+  <project path="system/core" name="cm_android_system_core" remote="jcrom" revision="cm-12.0-jcrom" />
+  <project path="vendor/cm" name="cm_android_vendor_cm" remote="jcrom" revision="cm-12.0-jcrom" />
+  <project path="external/sepolicy" name="cm_android_external_sepolicy" remote="jcrom" revision="cm-12.0-jcrom" />
 
-  <project path="android" name="CyanogenMod/android" />
-
+<!-- CyanogenMod -->
   <project path="abi/cpp" name="CyanogenMod/android_abi_cpp" groups="pdk" />
   <project path="art" name="CyanogenMod/android_art" groups="pdk" />
   <project path="bionic" name="CyanogenMod/android_bionic" groups="pdk" />
@@ -288,7 +306,6 @@
   <project path="external/rsync" name="CyanogenMod/android_external_rsync" />
   <project path="external/safe-iop" name="platform/external/safe-iop" groups="pdk" remote="aosp" />
   <project path="external/scrypt" name="platform/external/scrypt" groups="pdk" remote="aosp" />
-  <project path="external/sepolicy" name="CyanogenMod/android_external_sepolicy" groups="pdk" />
   <project path="external/sfntly" name="platform/external/sfntly" groups="pdk-cw-fs,qcom_msm8x26" remote="aosp" />
   <project path="external/skia" name="CyanogenMod/android_external_skia" groups="pdk-cw-fs,qcom_msm8x26" />
   <project path="external/smack" name="platform/external/smack" groups="pdk-cw-fw" remote="aosp" />
@@ -330,8 +347,6 @@
   <project path="external/zlib" name="CyanogenMod/android_external_zlib" groups="pdk" />
   <project path="external/zopfli" name="platform/external/zopfli" groups="pdk-cw-fs" remote="aosp" />
   <project path="external/zxing" name="platform/external/zxing" groups="pdk-cw-fs" remote="aosp" />
-  <project path="frameworks/av" name="CyanogenMod/android_frameworks_av" groups="pdk" />
-  <project path="frameworks/base" name="CyanogenMod/android_frameworks_base" />
   <project path="frameworks/compile/libbcc" name="CyanogenMod/android_frameworks_compile_libbcc" groups="pdk" />
   <project path="frameworks/compile/mclinker" name="CyanogenMod/android_frameworks_compile_mclinker" groups="pdk" />
   <project path="frameworks/compile/slang" name="CyanogenMod/android_frameworks_compile_slang" groups="pdk" />
@@ -446,7 +461,6 @@
   <project path="packages/apps/CMBugReport" name="CyanogenMod/android_packages_apps_CMBugreport" />
   <project path="packages/apps/CMFileManager" name="CyanogenMod/android_packages_apps_CMFileManager" />
   <!-- <project path="packages/apps/CMHome" name="CyanogenMod/android_packages_apps_CMHome" /> -->
-  <project path="packages/apps/CMUpdater" name="CyanogenMod/android_packages_apps_CMUpdater" />
   <project path="packages/apps/CMWallpapers" name="CyanogenMod/android_packages_apps_CMWallpapers" />
   <project path="packages/apps/Contacts" name="CyanogenMod/android_packages_apps_Contacts" />
   <project path="packages/apps/ContactsCommon" name="CyanogenMod/android_packages_apps_ContactsCommon" />
@@ -467,7 +481,6 @@
   <project path="packages/apps/PackageInstaller" name="CyanogenMod/android_packages_apps_PackageInstaller" />
   <project path="packages/apps/PhoneCommon" name="CyanogenMod/android_packages_apps_PhoneCommon" />
   <project path="packages/apps/Provision" name="CyanogenMod/android_packages_apps_Provision" />
-  <project path="packages/apps/Settings" name="CyanogenMod/android_packages_apps_Settings" />
   <project path="packages/apps/SetupWizard" name="CyanogenMod/android_packages_apps_SetupWizard" />
   <project path="packages/apps/SmartCardService" name="CyanogenMod/android_packages_apps_SmartCardService" />
   <project path="packages/apps/SoundRecorder" name="CyanogenMod/android_packages_apps_SoundRecorder" />
@@ -558,7 +571,6 @@
   <project path="prebuilts/sdk" name="platform/prebuilts/sdk" groups="pdk" remote="aosp" />
   <project path="prebuilts/tools" name="platform/prebuilts/tools" groups="pdk,tools" remote="aosp" />
   <project path="sdk" name="platform/sdk" remote="aosp" />
-  <project path="system/core" name="CyanogenMod/android_system_core" groups="pdk" />
   <project path="system/extras" name="CyanogenMod/android_system_extras" groups="pdk" />
   <project path="system/extras/su" name="CyanogenMod/android_system_extras_su" />
   <project path="system/keymaster" name="CyanogenMod/android_system_keymaster" groups="pdk" />
@@ -579,6 +591,5 @@
   <project path="tools/studio/cloud" name="platform/tools/studio/cloud" groups="notdefault,tools" remote="aosp" />
   <project path="tools/studio/translation" name="platform/tools/studio/translation" groups="notdefault,tools" remote="aosp" />
   <project path="tools/swt" name="platform/tools/swt" groups="notdefault,tools" remote="aosp" />
-  <project path="vendor/cm" name="CyanogenMod/android_vendor_cm" />
   <project path="vendor/cyngn" name="cyngn/android_vendor_cyngn" />
 </manifest>
